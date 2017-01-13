@@ -1,7 +1,5 @@
-source: .
 destination: ./_site
-lsi: false
-safe: false
+safe: true
 markdown: kramdown
 permalink: /blog/:year/:month/:title.html
 encoding: utf-8
