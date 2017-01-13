@@ -1,0 +1,46 @@
+---
+page_id: index
+---
+{% include head.html %}
+
+<link rel="stylesheet" href="/public/css/synatx.css">
+
+<div class="container">
+    <article class="post-detail">
+        <div class="article-info">
+            {% assign findAvatar=0 %}
+            {% for author in site.data.authors %}
+                {% if author.author == page.author %}
+                    <img src="{{ author.avatar }}" onerror="/public/images/avatar/qit.jpg" height="30" />
+                    {% assign findAvatar=1 %}
+                {% endif %}
+            {% endfor %}
+
+            {% if findAvatar == 0 %}
+                <img src="/public/images/avatar/qit.jpg" height="30" />
+            {% endif %}
+            <h1 class="title">{{ page.title }}</h1>
+            <div class="author">{{ page.author }} | {{ page.date | date_to_string }}</div>
+        </div>
+
+        <div class="content">
+        {{ content }}
+        </div>
+
+        <div class="author">
+        {% for author in site.data.authors %}
+            {% if author.author == page.author %}
+                作者：<a href="{{ author.url }}" target="_blank">{{ author.author }} ({{ author.url }})</a> - {{ author.intro }} <br/>
+                <a href="{{ author.url }}" target="_blank"></a> <br/>
+            {% endif %}
+        {% endfor %}
+        </div>
+
+    </article>
+
+    {% include sidebar.html %}
+
+</div>
+
+
+{% include foot.html %}

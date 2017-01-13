@@ -1,0 +1,52 @@
+---
+title: 首页
+---
+{% include head.html %}
+
+<div class="container">
+    <div class="post-lists">
+
+        <ul class="post-list">
+          {% assign count=0%}
+          {% assign last_week_showed=0%}
+          {% for post in site.posts %}
+
+              {% assign count=count | plus:1 %}
+              {% if count <= 12 %}
+                <li title="{{ post.title | strip_html }}" class="article-info">
+                    {% assign findAvatar=0 %}
+                    {% for author in site.data.authors %}
+                        {% if author.author == post.author %}
+                            <img src="{{ author.avatar }}" onerror="/public/images/avatar/qit.jpg" height="30" />
+                            {% assign findAvatar=1 %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if findAvatar == 0 %}
+                        <img src="/public/images/avatar/qit.jpg" height="30" />
+                    {% endif %}
+
+                    <a href="{{ post.url }}" class="x-title"><span>{{ post.title | strip_html | truncate: 22 }}</span></a>
+                    <div class="date">{{ post.author }} 发布于 {{ post.date | date_to_string }}</div>
+                    <div class="x-digest">{{ post.digest }}</div>
+                    <hr/>
+                    <div class="x-tag">#{{ post.tag | split:',' | join:'&nbsp;&nbsp;&nbsp;&nbsp;#' }}</div>
+                </li>
+              {% endif %}
+          {% endfor %}
+        </ul>
+
+        {% for post in site.posts %}
+            {% if forloop.index == 12 and forloop.length > 12 %}
+            <!-- Pagination links -->
+                <div class="getmore">
+                    <a href="/index/page2">查看更多</a>
+                </div>
+              {% endif %}
+        {% endfor %}
+    </div>
+
+    {% include sidebar.html %}
+</div>
+
+{% include foot.html %}

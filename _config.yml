@@ -1,1 +1,14 @@
-theme: jekyll-theme-slate
+name: QIT 趣店 技术学院
+url: https://qit-team.github.com
+source:      .
+destination: ./_site
+lsi:      false
+safe:     false
+markdown: kramdown
+permalink: /blog/:year/:month/:title.html
+paginate: 12
+paginate_path: "index/page:num"
+encoding: utf-8
+gems: [jekyll-paginate]
+post_defaults:
+  layout: post

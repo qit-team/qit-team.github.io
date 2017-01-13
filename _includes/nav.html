@@ -1,0 +1,15 @@
+{% if page.page_id %}
+    {% assign page_id = page.page_id %}
+{% else if layout.page_id %}
+    {% assign page_id = layout.page_id %}
+{% endif %}
+
+<div class="page-header">
+    <a href="/"><img src="/public/images/logo.jpg" alt="" class="logo" /></a>
+    <ul class="page-nav page-navi-{{page_id}}">
+        <li><a href="/">技术文章</a></li>
+        <li><a href="/join-us/20170104-op.html">近期招聘</a></li>
+        <li><a href="/join-us/about.html">关于我们</a></li>
+        <li><a href="https://github.com/qit-team">Github</a></li>
+    </ul>
+</div>

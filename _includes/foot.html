@@ -1,0 +1,25 @@
+<div class="page-footer">
+    <span class="copyright">&copy; 2017 趣店技术团队&nbsp;</span><span class="copyright">All rights reserved.</span>
+</div>
+
+
+<script>
+    var page = "{{page.url}}";
+
+    // 让页面高度自然撑开
+    window.onload = function(){
+        var elContainer = document.querySelector('div.container');
+        var ctHeight = elContainer.offsetHeight;
+        document.querySelectorAll('.post-lists,.post-detail,.at-page').forEach(function(el){
+            var elHeight = el.offsetHeight;
+            if(elHeight < ctHeight - 50) {
+                el.style.height = (ctHeight - 50) + 'px';
+            }
+        });
+
+    };
+</script>
+
+
+</body>
+</html>

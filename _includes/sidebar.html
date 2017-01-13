@@ -1,0 +1,33 @@
+<div class="page-sidebar">
+
+    <dl>
+        <dt>微信公众号</dt>
+        <dd>
+            <img width="260" src="/public/images/qrcode.jpg" />
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>加入我们</dt>
+        <dd>
+            <p style="text-indent: 2em">趣店（原趣分期）技术学院，重点关注技术架构、服务化、优秀工具、自动化平台、开发全流程一体化解决方案、新人培养、工程师进阶之道等方面</p>
+
+            <p>如果你对我们感兴趣，欢迎<a href="/join-us/about.html">【深入了解一下】</a></p>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>友情链接</dt>
+        <dd>
+            <ul>
+                {% if site.data.frdlinks.size > 0 %}
+                    {% for link in site.data.frdlinks %}
+                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                    {% endfor %}
+                {% endif %}
+
+                <li class="frdlink-apply"><a href="mailto:tech@qudian.com?subject=Hello%20QIT&body=申请友情链接互换，我们是「xxx」技术团队，博客地址是「xxx」！">&gt;&gt;点击这里申请「友情链接」互换&lt;&lt;</a></li>
+            </ul>
+        </dd>
+    </dl>
+</div>
