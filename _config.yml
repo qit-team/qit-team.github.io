@@ -1,5 +1,8 @@
 safe: false
 lsi: false
-markdown: kramdown
+highlighter: true
+markdown: redcarpet
+redcarpet:
+    extensions: ["fenced_code_blocks", "autolink", "tables", "strikethrough"]
 permalink: /blog/:year/:month/:title.html
 encoding: utf-8
