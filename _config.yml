@@ -1,11 +1,11 @@
-name: QIT 趣店 技术学院
+name: 趣店技术学院
 url: https://qit-team.github.com
-source:      .
+source: .
 destination: ./_site
-lsi:      false
-safe:     false
+lsi: false
+safe: false
 markdown: kramdown
 permalink: /blog/:year/:month/:title.html
 encoding: utf-8
 post_defaults:
-  layout: post
+ layout: post
