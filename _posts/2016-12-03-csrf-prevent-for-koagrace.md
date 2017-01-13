@@ -79,36 +79,37 @@ token防御的整体思路是：
 * [koa-grace——基于koa的标准前后端分离框架](https://github.com/xiongwilee/koa-grace)
 * [grace-vue-webpack-boilerplate](https://github.com/Thunf/grace-vue-webpack-boilerplate)
 
-在服务端，实现了一个token生成的中间件，[koa-grace-csrf](https://github.com/koa-grace/koa-grace-csrf)：
+在服务端，实现了一个token生成的中间件，[koa-grace-csrf](https://github.com/koa-grace/koa-grace-csrf) ：
+
 ```javascript
-  // 注意：代码有做精简
-  
-  const tokens = require('./lib/tokens');
-  return function* csrf(next) {
-    let curSecret = this.cookies.get('密文的cookie');
-    // 其他如果要获取参数，则为配置参数值
-    let curToken = '请求http头信息中的token';
-    
-    // token不存在
-    if (!curToken || !curSecret) {
-      return this.throw('CSRF Token Not Found!',403)
+    // 注意：代码有做精简
+    const tokens = require('./lib/tokens');
+    return function* csrf(next) {
+        
+        let curSecret = this.cookies.get('密文的cookie');
+        // 其他如果要获取参数，则为配置参数值
+        let curToken = '请求http头信息中的token';
+        
+        // token不存在
+        if (!curToken || !curSecret) {
+          return this.throw('CSRF Token Not Found!',403)
+        }
+        
+        // token校验失败
+        if (!tokens.verify(curSecret, curToken)) {
+          return this.throw('CSRF token Invalid!',403)
+        }
+        
+        yield next;
+        
+        // 无论何种情况都种两个cookie
+        // cookie_key: 当前token的cookie_key,httpOnly
+        let secret = tokens.secretSync();
+        this.cookies.set(options.cookie_key, secret);
+        // cookie_token: 当前token的的content，不需要httpOnly
+        let newToken = tokens.create(secret);
+        this.cookies.set(options.cookie_token, newToken)
     }
-
-    // token校验失败
-    if (!tokens.verify(curSecret, curToken)) {
-      return this.throw('CSRF token Invalid!',403)
-    }
-
-    yield next;
-
-    // 无论何种情况都种两个cookie
-    // cookie_key: 当前token的cookie_key,httpOnly
-    let secret = tokens.secretSync();
-    this.cookies.set(options.cookie_key, secret);
-    // cookie_token: 当前token的的content，不需要httpOnly
-    let newToken = tokens.create(secret);
-    this.cookies.set(options.cookie_token, newToken)
-  }
 ```
 
 在前端代码中，对发送ajax请求的封装稍作优化：
