@@ -1,8 +1,4 @@
 source: ./
-layouts_dir: ./_layouts
-includes: ./_includes
-data: ./_data
-posts: ./_posts
 destination: ./_site
 safe: true
 markdown: kramdown
