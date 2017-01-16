@@ -1,6 +1,6 @@
 safe: false
 lsi: false
-highlighter: true
+rouge: true
 markdown: redcarpet
 redcarpet:
     extensions: ["fenced_code_blocks", "autolink", "tables", "strikethrough"]
