@@ -1,5 +1,6 @@
 safe: false
 lsi: false
 rouge: true
+markdown: kramdown
 permalink: /blog/:year/:month/:title.html
 encoding: utf-8
