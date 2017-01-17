@@ -6,15 +6,17 @@ tag: 微信小程序,重力感应,requestAnimationFrame
 digest: 最近做微信小程序的开发时，想做一个靠感知手机方向，使页面上节点跟随移动的动画（即重力感应视差效果）功能。结果发现微信小程序有一些坑，本文主要通过这些坑展开，聊聊相关的一些技术知识。
 ---
 
+### 一、背景
 最近做微信小程序的开发时，想做一个靠感知手机方向，使页面上节点跟随移动的动画（即重力感应视差效果）功能。结果发现微信小程序有一些坑：
-- 微信小程序不支持html5的[DeviceOrientationEvent](https://developer.mozilla.org/zh-CN/docs/Web/API/Detecting_device_orientation)重力感应API，而是自己实现的[wx.onAccelerometerChange](https://mp.weixin.qq.com/debug/wxadoc/dev/api/accelerometer.html?t=2017112#wxonaccelerometerchangecallback)
-- 这个API回调实现，频率为5次/s 
+
+* 微信小程序不支持html5的[DeviceOrientationEvent](https://developer.mozilla.org/zh-CN/docs/Web/API/Detecting_device_orientation)重力感应API，而是自己实现的[wx.onAccelerometerChange](https://mp.weixin.qq.com/debug/wxadoc/dev/api/accelerometer.html?t=2017112#wxonaccelerometerchangecallback)
+* 这个API回调实现，频率为5次/s 
 
 在这个背景下，要实现平滑的重力感应的视差体验就那么优雅了，因为人对至少60帧每秒的动画才会感觉流畅。最终实现的效果会有卡顿现象。
 
 实现期间，想起好像有`requestAnimationFrame`这个跟动画相关的API，其功能表现与`setTimeout`类似，即隔一段时间调用一个回调函数。对于这个API，之前了解不深，这次拿起来产生了一个疑问：既生`setTimeout`，何生`requestAnimationFrame`？带着疑问，开始调研。
 
-## 与setTimeout的不同
+### 二、与setTimeout的不同
 在MDN上，关于`requestAnimationFrame`的定义是：
 > window.requestAnimationFrame()这个方法是用来在页面重绘之前，通知浏览器调用一个指定的函数，以满足开发者操作动画的需求。这个方法接受一个函数为参，该函数会在重绘前调用。
 
@@ -44,9 +46,10 @@ requestAnimationFrame(test)
 ![](http://img002.qufenqi.com/products/18/21/18211bd4ca1925b87e680390b65cfe76.png@250h)
 
 对此我产生几个疑问：
-- 问题1：如果我干扰了重绘的频率，是否还会是一个几乎保持在每秒60帧的频率呢（只针对提高频率进行探究）？
-- 问题2：是否调用了requestAnimationFrame就会产生一定频率的重绘？
-- 问题3：如果不调用requestAnimationFrame，在无其他代码去重绘页面的话，页面就不会重绘吗？
+
+* 问题1：如果我干扰了重绘的频率，是否还会是一个几乎保持在每秒60帧的频率呢（只针对提高频率进行探究）？
+* 问题2：是否调用了requestAnimationFrame就会产生一定频率的重绘？
+* 问题3：如果不调用requestAnimationFrame，在无其他代码去重绘页面的话，页面就不会重绘吗？
 
 为了验证问题1，我加了这么一段代码：
 
@@ -68,8 +71,8 @@ interference()
 等等，人为干扰重绘频率成功了吗？会不会虽然`interference`的调用频率为5ms一次，但浏览器的重绘频率依旧是约等于60次每秒，即`interference`虽然试图去触发浏览器5ms重绘一次，但浏览器只会阻塞住，等下一次浏览器默认频率重绘时再一起重绘？
 
 为了探究这个问题，我将`interference`的setTimeout时间分别设置为16ms（简称为i16）、10ms（简称为i10）、8ms（简称为i8）、5ms（简称为i5），如果浏览器重绘频率无法人为干扰，因以下两个原因：
-- `interference`的函数对`$('.test')`的改变为水平位移正负20px交替出现
-- 浏览器默认重绘频率接近16ms一次
+* `interference`的函数对`$('.test')`的改变为水平位移正负20px交替出现
+* 浏览器默认重绘频率接近16ms一次
 
 i8会因16ms中被调用2次，使得`$('.test')`回归原位而导致肉眼看到的`$('.test')`闪动频率最慢；而i16的调用频率和重绘频率最为接近，在这种情况下，肉眼看到的`$('.test')`闪动频率会是最快。
 
@@ -87,17 +90,18 @@ i8会因16ms中被调用2次，使得`$('.test')`回归原位而导致肉眼看�
 ![](http://img002.qufenqi.com/products/fe/a9/fea9ade41a468176c806520299ee8973.png@450w)
 
 有了这个工具，其余两个问题也迎刃而解：
-- 问题2的答案：调用了requestAnimationFrame就会产生一定频率的重绘，只是这种情况下的重绘会因并无实质重绘内容，而历时极短。
+
+* 问题2的答案：调用了requestAnimationFrame就会产生一定频率的重绘，只是这种情况下的重绘会因并无实质重绘内容，而历时极短。
 
 ![](http://img002.qufenqi.com/products/d9/43/d94342754a05580ff4bd955bd375e835.png@350w)
 
-- 问题3的答案：如果不调用requestAnimationFrame，在无其他代码去重绘页面的话，页面就不会重绘
+* 问题3的答案：如果不调用requestAnimationFrame，在无其他代码去重绘页面的话，页面就不会重绘
 
 ![D436903A-740E-42B9-A817-7FEB7BF84C1B.png](http://img002.qufenqi.com/products/b2/4f/b24f2a33e30f870bce34827989e15026.png@400w)
 
 调研到这一步，发现requestAnimationFrame和setTimeout根本不是一回事。requestAnimationFrame是一个根据浏览器重绘频率来调用的方法，setTimeout则是一个计时器。定义不同，适用的场景也完全不同，也没有性能高低之分。
 
-## 兼容性
+### 三、兼容性
 MDN给出的requestAnimationFrame的兼容性如下：
 
 ![](http://img002.qufenqi.com/products/ce/90/ce9084c0ccd9adee452dbda3955ebcab.png@400w)
@@ -138,15 +142,15 @@ MDN给出的requestAnimationFrame的兼容性如下：
 }());
 ```
 
-## requestAnimationFrame在微信小程序里的表现
-- 微信iOS版小程序完全不支持requestAnimationFrame
+### 四、requestAnimationFrame在微信小程序里的表现
+* 微信iOS版小程序完全不支持requestAnimationFrame
 
-## 结论
-- requestAnimationFrame和setTimeout根本不是一回事，根据其定义，可以在不同场景下使用。
-- 较于tranlate，tranlate3d能得到更完整的GPU加速的支持。
-- 浏览器对页面的重绘有一个默认的最大频率，最大频率无法人为设置，也没有设置的必要。
-- 调用了requestAnimationFrame就会产生一定频率的重绘，只是这种情况下的重绘会因并无实质重绘内容，而历时极短。
-- 如果不调用requestAnimationFrame，在无其他代码去重绘页面的话，页面就不会重绘。
+### 五、结论
+* requestAnimationFrame和setTimeout根本不是一回事，根据其定义，可以在不同场景下使用。
+* 较于tranlate，tranlate3d能得到更完整的GPU加速的支持。
+* 浏览器对页面的重绘有一个默认的最大频率，最大频率无法人为设置，也没有设置的必要。
+* 调用了requestAnimationFrame就会产生一定频率的重绘，只是这种情况下的重绘会因并无实质重绘内容，而历时极短。
+* 如果不调用requestAnimationFrame，在无其他代码去重绘页面的话，页面就不会重绘。
 
 
 最后，附上我们趣店集团的小程序二维码：
