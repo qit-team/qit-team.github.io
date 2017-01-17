@@ -41,5 +41,4 @@ page_id: joinus
 
 ![](/public/images/office/office-3.jpeg)
 
-
-> 啥也不说了，快到碗里来：[tech@qudian.com](mailto:tech@qudian.com?subject=Hello%20QIT&body=我对你们趣店技术学院比较感兴趣，申请加入！) ！
+> 啥也不说了，快到碗里来：<a href="mailto:tech@qudian.com?subject=Hello%20QIT&body=我对你们趣店技术学院比较感兴趣，申请加入！">tech@qudian.com</a>
