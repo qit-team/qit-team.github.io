@@ -13,7 +13,7 @@ title: 首页
                 {% assign findAvatar=0 %}
                 {% for author in site.data.authors %}
                     {% if author.author == post.author %}
-                        <img src="{{ author.avatar }}" onerror="/public/images/avatar/qit.jpg" height="30" />
+                        <img src="{{ author.avatar }}" onerror="this.src='/public/images/avatar/qit.jpg'" height="30" />
                         {% assign findAvatar=1 %}
                     {% endif %}
                 {% endfor %}
@@ -22,7 +22,7 @@ title: 首页
                     <img src="/public/images/avatar/qit.jpg" height="30" />
                 {% endif %}
 
-                <a href="{{ post.url }}" class="x-title"><span>{{ post.title | strip_html | truncate: 22 }}</span></a>
+                <a href="{{ post.url }}" class="x-title"><span>{{ post.title | strip_html }}</span></a>
                 <div class="date">{{ post.author }} 发布于 {{ post.date | date_to_string }}</div>
                 <div class="x-digest">{{ post.digest }}</div>
                 <hr/>
