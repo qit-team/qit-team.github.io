@@ -394,14 +394,27 @@ article,.post-lists {
     padding: 0;
     margin:0 auto;
     .page-sidebar {
-      display: none;
+      float: none;
+      width:auto;
+
+      .mod-qrcode {
+        dd {
+          text-align: center;
+        }
+        img {
+          width:80%;
+        }
+      }
+      .mod-frdlink {
+        display: none;
+      }
     }
     article,.post-lists {
       width: auto;
       box-sizing: border-box;
-      box-shadow: none;
       padding: 10px;
       float: none;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
       .title {
         font-size: 18px;
       }

@@ -8,6 +8,9 @@
 
     // 让页面高度自然撑开
     window.onload = function(){
+        if(/iPhone|Android/i.test(navigator.userAgent)) {
+            return false;
+        }
         var elContainer = document.querySelector('div.container');
         var ctHeight = elContainer.offsetHeight;
         document.querySelectorAll('.post-lists,.post-detail,.at-page').forEach(function(el){
