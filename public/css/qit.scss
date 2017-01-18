@@ -152,13 +152,13 @@ article,.post-lists {
         font-size: 14px;
         line-height: 22px;
         h2 {
-            margin: 50px 0 10px;
+            margin: 30px 0 10px;
             padding: 0 0 0 20px;
             font-size: 18px;
             border-left: 3px solid #dddddd;
         }
         h3 {
-            margin: 40px 0 10px;
+            margin: 30px 0 10px;
             font-size: 14px;
             border-bottom: 2px solid #dadada;
         }
@@ -398,6 +398,12 @@ article,.post-lists {
       width:auto;
 
       .mod-qrcode {
+        dt {
+          span {
+            color:#f00;
+            display: none;
+          }
+        }
         dd {
           text-align: center;
         }

@@ -30,8 +30,12 @@ page_id: index
         <div class="author">
         {% for author in site.data.authors %}
             {% if author.author == page.author %}
-                作者：<a href="{{ author.url }}" target="_blank">{{ author.author }} ({{ author.url }})</a> - {{ author.intro }} <br/>
-                <a href="{{ author.url }}" target="_blank"></a> <br/>
+
+                {% if author.url != 0 %}
+                    作者：<a href="{{ author.url }}" target="_blank">{{ author.author }} ({{ author.url }})</a> - {{ author.intro }} <br/>
+                {% else %}
+                    作者：<a href="#" target="_blank">{{ author.author }}</a> - {{ author.intro }} <br/>
+                {% endif %}
             {% endif %}
         {% endfor %}
         </div>

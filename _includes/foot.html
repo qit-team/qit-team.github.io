@@ -4,21 +4,27 @@
 
 
 <script>
-    var page = "{{page.url}}";
 
     // 让页面高度自然撑开
     window.onload = function(){
+        // 移动端的表现
         if(/iPhone|Android/i.test(navigator.userAgent)) {
-            return false;
-        }
-        var elContainer = document.querySelector('div.container');
-        var ctHeight = elContainer.offsetHeight;
-        document.querySelectorAll('.post-lists,.post-detail,.at-page').forEach(function(el){
-            var elHeight = el.offsetHeight;
-            if(elHeight < ctHeight - 50) {
-                el.style.height = (ctHeight - 50) + 'px';
+            // 微信终端的适配
+            if(/MicroMessenger/i.test(navigator.userAgent)) {
+                document.querySelector('dl.mod-qrcode dt span').style.display = 'inline';
             }
-        });
+
+        }else{
+            // PC端的适配
+            var elContainer = document.querySelector('div.container');
+            var ctHeight = elContainer.offsetHeight;
+            document.querySelectorAll('.post-lists,.post-detail,.at-page').forEach(function(el){
+                var elHeight = el.offsetHeight;
+                if(elHeight < ctHeight - 50) {
+                    el.style.height = (ctHeight - 50) + 'px';
+                }
+            });
+        }
 
     };
 </script>

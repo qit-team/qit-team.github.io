@@ -9,7 +9,7 @@
   avatar: /public/images/avatar/zhaoxianlie.jpeg
 
 - author: 徐章健
-  url: http://qit-team.github.io/
+  url: 0
   intro: 趣店集团首席技术架构师
   avatar: /public/images/avatar/xuzhangjian.png
 
@@ -19,6 +19,11 @@
   avatar: /public/images/avatar/xiongweilie.png
 
 - author: 沈琦耀
-  url: http://qit-team.github.io/
+  url: 0
   intro: 趣店前端高级研发；外号「东北歌王」
   avatar: /public/images/avatar/shenqiyao.jpg
+
+- author: 徐纯芳
+  url: 0
+  intro: 趣店集团监控报警系统负责人
+  avatar: /public/images/avatar/xuchunfang.png
