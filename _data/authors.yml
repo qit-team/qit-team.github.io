@@ -20,10 +20,15 @@
 
 - author: 沈琦耀
   url: 0
-  intro: 趣店前端高级研发；外号「东北歌王」
+  intro: 趣店集团Web前端高级研发；外号「东北歌王」
   avatar: /public/images/avatar/shenqiyao.jpg
 
 - author: 徐纯芳
   url: 0
   intro: 趣店集团监控报警系统负责人
   avatar: /public/images/avatar/xuchunfang.png
+
+- author: 高雪婷
+  url: 0
+  intro: 趣店集团Web前端工程师
+  avatar: /public/images/avatar/qit.png
