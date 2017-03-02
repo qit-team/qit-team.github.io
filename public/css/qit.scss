@@ -443,3 +443,13 @@ article,.post-lists {
     width: 100%;
   }
 }
+
+.at-page {
+  article {
+    padding:0;
+  }
+
+  .content {
+    padding-bottom: 10px;
+  }
+}
