@@ -43,11 +43,11 @@ void doPost（HttpServletRequest request, HttpServletResponse response）{
 select * from product where pname like '%name%';
 ```
 如果name变量输入
-`qudian’;drop database;//`
+`qudian';drop database;//`
 就变成了
 
 ```javascript
-select * from product where name like 'a';drop database;//;
+select * from product where name like '%qudian';drop database;//%';
 ```
 那么怎么防御sql注入呢？最简单正确的方式就是预编译。
 为什么用预编译，首先要了解sql注入的原理：
