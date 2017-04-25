@@ -1,13 +1,14 @@
 ---
 layout: share
 title: 【风控高端人才招聘】@趣店集团
-nosubtitle: 1
+subtitle: 0
 author: 趣店风控团队
 page_id: risk
 date: 2017-04-25
 tag: 风控,趣店
 nav: 0
 sidebar: 0 
+footer: 0
 ---
 
 
