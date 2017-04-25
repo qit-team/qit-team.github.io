@@ -1,0 +1,36 @@
+
+{% comment %}这个布局用于存放单独的页面，如招聘页。{% endcomment %}
+
+{% include head.html %}
+
+<div class="container">
+
+    <article class="at-page">
+
+        {% if page.date %}
+            <div class="article-info">
+                <div class="content">
+                    <img src="/public/images/avatar/qd-share.png" height="30" />
+                    <h1 class="title">{{ page.title }}</h1>
+                    <div class="author">{{ page.author }} 发布于 {{ page.date }}</div>
+                </div>
+            </div>
+        {% endif %}
+
+
+        <article>
+            <div class="content">
+                {{ content }}
+            </div>
+        </article>
+
+    </article>
+
+    {% if page.sidebar != 0 %}
+        {% include sidebar.html %}
+    {% endif %}
+
+</div>
+
+
+{% include foot.html %}
