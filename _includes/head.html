@@ -3,14 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="{{ page.title }}_趣店技术学院" />
-    <meta name="keywords" content="{{ page.title }},趣店（原趣分期）技术学院,重点关注技术架构,服务化,优秀工具,自动化平台,开发全流程一体化解决方案,新人培养,工程师进阶之道" />
 
     {% if page.subtitle == 0 %}
         <title>{{ page.title }}</title>
+        <meta name="description" content="{{ page.title }}" />
     {% else %}
         <title>{{ page.title }} - 趣店技术学院</title>
+        <meta name="description" content="{{ page.title }}_趣店技术学院" />
     {% endif %}
+
+    <meta name="keywords" content="{{ page.title }},趣店（原趣分期）技术学院,重点关注技术架构,服务化,优秀工具,自动化平台,开发全流程一体化解决方案,新人培养,工程师进阶之道" />
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
