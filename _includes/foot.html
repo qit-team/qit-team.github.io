@@ -7,6 +7,7 @@
 
 <script src="/public/js/jquery-1.9.1.min.js"></script>
 <script src="/public/back2top/back2top.js"></script>
+<script src="/public/js/weixin-api.js"></script>
 
 <script>
     // 初始化
@@ -33,6 +34,30 @@
         }
 
     };
+
+    // 在微信浏览器中，点击图片，自动进行预览
+    (function(){
+        var imgList = {
+            imgs: [],
+            srcs: []
+        };
+        $.each($('img'), function (i, item) {
+            if (item.src && $(item).height() > 80 && $(item).width() > 80) {
+                imgList.imgs.push(item);
+                imgList.srcs.push(item.src);
+                // 修正text-indent
+                if (parseInt($(item).css('text-indent'), 10) > 0) {
+                    $(item).parent().css('text-indent', 0);
+                }
+            }
+        });
+
+        WeixinApi.ready(function(Api){
+            $(imgList.imgs).click(function (e) {
+                Api.imagePreview($(this).attr('src'),imgList.srcs);
+            });
+        });
+    })();
 
     // 百度统计
     var _hmt = _hmt || [];
