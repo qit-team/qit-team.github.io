@@ -60,8 +60,9 @@ digest: 结合趣店 FED 在过去小半年的实践经验，我们开发了首�
 
 ~~~ js
 // View 标签高度不会是 100px，图片下方会有几像素空白，称为幽灵空白
+const imgStyle = { height: '100px' }
 <View>
-  <Image src={...} style={{ height: '100px' }}
+  <Image src={...} style={imgStyle}
 </View>
 ~~~
 
@@ -74,7 +75,8 @@ digest: 结合趣店 FED 在过去小半年的实践经验，我们开发了首�
 RN 实际上只支持一种样式声明方式，即声明 style 属性：
 
 ~~~ js
-<View style={{ height: '100%' }}
+const viewStyle = { height: '100%' }
+<View style={viewStyle}
 ~~~
 
 这也导致 Taro 在 RN 端基本只支持 class 选择器这一种写法（最终编译成对象字面量），BEM（Block Element Modifier）在此处就恰如其分的发挥了作用：
@@ -199,7 +201,8 @@ import { WebView } from 'react-native'
 
 export default class WebViewRN extends Component {
   render() {
-    return <WebView source={{ uri: this.props.src }} />
+    const source = { uri: this.props.src }
+    return <WebView source={source} />
   }
 }
 ~~~
