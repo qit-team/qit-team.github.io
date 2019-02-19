@@ -58,12 +58,12 @@ digest: 结合趣店 FED 在过去小半年的实践经验，我们开发了首�
 
 使用 Flex 布局，不单单是因为 RN 的 `View` 标签有默认样式 `display: flex; flex-direction: column`，更重要的是 Flex 可以解决幽灵空白问题：
 
-``` jsx
+~~~ js
 // View 标签高度不会是 100px，图片下方会有几像素空白，称为幽灵空白
 <View>
   <Image src={...} style={{ height: '100px' }}
 </View>
-```
+~~~
 
 常规解决方案是在 View 标签上设置 `font-size / line-height: 0`, 或 Image 标签 `display: inline-block` 等，但这些在 RN 中都不支持，给 View 标签设置 `display: flex` 算是唯一可靠方案了。
 
@@ -73,9 +73,9 @@ digest: 结合趣店 FED 在过去小半年的实践经验，我们开发了首�
 
 RN 实际上只支持一种样式声明方式，即声明 style 属性：
 
-``` js
+~~~ js
 <View style={{ height: '100%' }}
-```
+~~~
 
 这也导致 Taro 在 RN 端基本只支持 class 选择器这一种写法（最终编译成对象字面量），BEM（Block Element Modifier）在此处就恰如其分的发挥了作用：
 
@@ -180,7 +180,7 @@ function foo() {
 
 而对于简单的环境判断处理不了的问题，就只能动用原生开发了，例如 Taro 还不支持 RN 端的 WebView 组件，就需要自己用原生 RN 实现：
 
-``` jsx
+~~~ js
 // Taro 页面，根据环境引入 RN 原生页面
 import { WebView } from '@tarojs/components'
 const WebViewRN = process.env.TARO_ENV === 'rn' ? require('./rn').default : null
@@ -202,7 +202,7 @@ export default class WebViewRN extends Component {
     return <WebView source={{ uri: this.props.src }} />
   }
 }
-```
+~~~
 
 `process.env.TARO_ENV` 的处理是编译时而不是运行时，也就是说若不是编译 RN，上述用原生写的 RN 页面不会被打包，保证了编译成其他端时不会引入不支持的内容。
 
