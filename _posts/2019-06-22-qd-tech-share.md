@@ -50,10 +50,10 @@ digest: 今年3月份趣店技术沙龙第二季，我们聊了一个关于前�
 - [ReactNative企业级应用落地与优化-趣店吴盛华.pptx](/public/ppts/share03/ReactNative企业级应用落地与优化-趣店吴盛华.pptx)
 
 ## 会议现场
-- [](/public/images/share03/1.JPG)
-- [](/public/images/share03/2.JPG)
-- [](/public/images/share03/3.JPG)
-- [](/public/images/share03/4.JPG)
-- [](/public/images/share03/5.JPG)
-- [](/public/images/share03/6.JPG)
-- [](/public/images/share03/7.JPG)
+- ![](/public/images/share03/1.JPG)
+- ![](/public/images/share03/2.JPG)
+- ![](/public/images/share03/3.JPG)
+- ![](/public/images/share03/4.JPG)
+- ![](/public/images/share03/5.JPG)
+- ![](/public/images/share03/6.JPG)
+- ![](/public/images/share03/7.JPG)
